@@ -45,6 +45,7 @@ def read_bitcoin_config(dbdir, conffile):
     """Read the crown config file from dbdir, returns dictionary of settings"""
     with open(os.path.join(dbdir, conffile)) as stream:
         config = dict(line.strip().split('=', 1) for line in stream if not line.startswith("#") and not len(line.strip()) == 0)
+    #print("Leaving read_bitcoin_config with %s and %s"%(config['rpcuser'], config['rpcpassword']))
     return config
 
 def connect_JSON(config):
@@ -238,7 +239,7 @@ def main():
     parser.add_option("--to", dest="toaddress", default=None,
                       help="address to send CRW to. Specify 'new' for a new address in the local wallet")
     parser.add_option("--amount", dest="amount", default=None,
-                      help="amount to send excluding fee")
+                      help="amount to send exc  luding fee")
     parser.add_option("--fee", dest="fee", default="0.025",
                       help="amount of fee to pay")
     parser.add_option("--config", dest="conffile", default="crown.conf",
