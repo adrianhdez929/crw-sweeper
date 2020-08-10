@@ -16,8 +16,10 @@ class Dialog(QDialog):
         self.setupUI()
         self.hookElems()
         self.retranslateUI()
+
         if not try_conn(self, self.options):
             raise RuntimeError("Can't connect to crownd")
+
         addresses = list()
         spendable_amount = 0
         address_summary = connect(self, self.options)
@@ -28,6 +30,10 @@ class Dialog(QDialog):
 
         self.label_5.setText(str(spendable_amount))
         self.listWidget.addItems(addresses)
+        for i in range(self.listWidget.count()):
+            item = self.listWidget.item(i)
+            ch = QCheckBox()
+            self.listWidget.setItemWidget(item, ch)
 
         QMetaObject.connectSlotsByName(self)
     
@@ -105,7 +111,7 @@ class Dialog(QDialog):
         self.progressBar = QProgressBar(self.frame_4)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setGeometry(QRect(50, 70, 172, 23))
-        self.progressBar.setValue(24)
+        self.progressBar.setValue(0)
         # Balance GroupBox
         self.groupBox = QGroupBox(self)
         self.groupBox.setObjectName(u"groupBox")
