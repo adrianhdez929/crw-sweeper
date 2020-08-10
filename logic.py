@@ -1,4 +1,5 @@
 from spendfrom import *
+from PyQt5.QtWidgets import QCheckBox
 #from crown_pycurl.client import Client
 #import pycurl
 
@@ -58,6 +59,7 @@ def sweep(dialog, options):
         txlen = len(txdata)/2
         if txlen < 250000:
             txid = crownd.sendrawtransaction(txdata)
+            refresh(dialog, options)
             return dialog.notify(txid)
         else:
             return dialog.notify("Transaction size is too large")
@@ -99,3 +101,18 @@ def get_checkbox(widget, options):
         options.upto = value
         print(options.upto)
     
+def refresh(widget, options):
+    addresses = list()
+    spendable_amount = 0
+    address_summary = connect(widget, options)
+    if address_summary.items():
+        for address,info in address_summary.items():
+            addresses.append("%s %.8f %s"%(address, info['total'], info['account']))
+            spendable_amount += info['total']
+
+    widget.label_5.setText(str(spendable_amount))
+    widget.listWidget.addItems(addresses)
+    for i in range(widget.listWidget.count()):
+        item = widget.listWidget.item(i)
+        ch = QCheckBox()
+        widget.listWidget.setItemWidget(item, ch)

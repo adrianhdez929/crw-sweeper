@@ -20,21 +20,8 @@ class Dialog(QDialog):
         if not try_conn(self, self.options):
             raise RuntimeError("Can't connect to crownd")
 
-        addresses = list()
-        spendable_amount = 0
-        address_summary = connect(self, self.options)
-        if address_summary.items():
-            for address,info in address_summary.items():
-                addresses.append("%s %.8f %s"%(address, info['total'], info['account']))
-                spendable_amount += info['total']
-
-        self.label_5.setText(str(spendable_amount))
-        self.listWidget.addItems(addresses)
-        for i in range(self.listWidget.count()):
-            item = self.listWidget.item(i)
-            ch = QCheckBox()
-            self.listWidget.setItemWidget(item, ch)
-
+        refresh(self, self.options)
+        
         QMetaObject.connectSlotsByName(self)
     
     def hookElems(self):
@@ -49,7 +36,7 @@ class Dialog(QDialog):
         self.lineEdit_6.editingFinished.connect(partial(get_input, self.lineEdit_6, self.options))
         # OnItemSelection
         self.listWidget.itemSelectionChanged.connect(partial(selected_items, self.listWidget, self.options))
-        
+
     def setupUI(self):
         if not self.objectName():
             self.setObjectName(u"Dialog")
