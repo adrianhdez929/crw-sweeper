@@ -12,11 +12,12 @@ class Dialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.options = Options()
+        #print("Using %s in %s"%(self.options.conffile, self.options.datadir))
         self.setupUI()
         self.hookElems()
         self.retranslateUI()
-        while not try_conn(self, self.options):
-            pass
+        if not try_conn(self, self.options):
+            raise RuntimeError("Can't connect to crownd")
         addresses = list()
         spendable_amount = 0
         address_summary = connect(self, self.options)

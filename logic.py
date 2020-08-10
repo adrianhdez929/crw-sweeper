@@ -6,6 +6,7 @@ from spendfrom import *
 def try_conn(dialog, options):
     try:
         config = read_bitcoin_config(options.datadir, options.conffile)
+        #print("Using %s and %s"%(config['rpcuser'], config['rpcpassword']))
         if options.testnet: config['testnet'] = True
         crownd = connect_JSON(config)
         #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
@@ -19,7 +20,7 @@ def try_conn(dialog, options):
 def connect(dialog, options):
     try:
         check_json_precision()
-        config = read_bitcoin_config(options.datadir, options.config)
+        config = read_bitcoin_config(options.datadir, options.conffile)
         if options.testnet: config['testnet'] = True
         crownd = connect_JSON(config)
         #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
@@ -34,7 +35,7 @@ def connect(dialog, options):
 
 def sweep(dialog, options):
     check_json_precision()
-    config = read_bitcoin_config(options.datadir, options.config)
+    config = read_bitcoin_config(options.datadir,options.conffile)
     if options.testnet: config['testnet'] = True
     crownd = connect_JSON(config)
     #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
@@ -45,7 +46,7 @@ def sweep(dialog, options):
         #if options.toaddress.lower() == 'new':
         #    options.toaddress = crownd.getnewaddress('')
         #    print("Sending to new address %s"%(options.toaddress))
-    if not crownd.validateaddress(options.toaddress)['result']['isvalid']:
+    if not (crownd.validateaddress(options.toaddress))['isvalid']:
         return dialog.notify("To address is invalid")
     else:    
         fee = Decimal(options.fee)
