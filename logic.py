@@ -46,7 +46,7 @@ def sweep(dialog, options):
         #if options.toaddress.lower() == 'new':
         #    options.toaddress = crownd.getnewaddress('')
         #    print("Sending to new address %s"%(options.toaddress))
-    if not crownd.validateaddress(options.toaddress)['result']['isvalid']:
+    if not (crownd.validateaddress(options.toaddress))['isvalid']:
         return dialog.notify("To address is invalid")
     else:    
         fee = Decimal(options.fee)
