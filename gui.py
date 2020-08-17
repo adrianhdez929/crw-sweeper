@@ -16,12 +16,25 @@ class Dialog(QDialog):
         self.setupUI()
         self.hookElems()
         self.retranslateUI()
-
         if not try_conn(self, self.options):
             raise RuntimeError("Can't connect to crownd")
+<<<<<<< HEAD
 
         refresh(self, self.options)
         
+=======
+        addresses = list()
+        spendable_amount = 0
+        address_summary = connect(self, self.options)
+        if address_summary.items():
+            for address,info in address_summary.items():
+                addresses.append("%s %.8f %s"%(address, info['total'], info['account']))
+                spendable_amount += info['total']
+
+        self.label_5.setText(str(spendable_amount))
+        self.listWidget.addItems(addresses)
+
+>>>>>>> parent of e506851... Attemp to add checkboxes to the address list
         QMetaObject.connectSlotsByName(self)
     
     def hookElems(self):
@@ -98,7 +111,7 @@ class Dialog(QDialog):
         self.progressBar = QProgressBar(self.frame_4)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setGeometry(QRect(50, 70, 172, 23))
-        self.progressBar.setValue(0)
+        self.progressBar.setValue(24)
         # Balance GroupBox
         self.groupBox = QGroupBox(self)
         self.groupBox.setObjectName(u"groupBox")
