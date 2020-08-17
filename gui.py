@@ -19,10 +19,13 @@ class Dialog(QDialog):
         if not try_conn(self, self.options):
             raise RuntimeError("Can't connect to crownd")
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         refresh(self, self.options)
         
 =======
+=======
+>>>>>>> parent of e506851... Attemp to add checkboxes to the address list
         addresses = list()
         spendable_amount = 0
         address_summary = connect(self, self.options)
