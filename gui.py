@@ -18,14 +18,8 @@ class Dialog(QDialog):
         self.retranslateUI()
         if not try_conn(self, self.options):
             raise RuntimeError("Can't connect to crownd")
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         refresh(self, self.options)
-        
-=======
-=======
->>>>>>> parent of e506851... Attemp to add checkboxes to the address list
         addresses = list()
         spendable_amount = 0
         address_summary = connect(self, self.options)
@@ -37,7 +31,6 @@ class Dialog(QDialog):
         self.label_5.setText(str(spendable_amount))
         self.listWidget.addItems(addresses)
 
->>>>>>> parent of e506851... Attemp to add checkboxes to the address list
         QMetaObject.connectSlotsByName(self)
     
     def hookElems(self):

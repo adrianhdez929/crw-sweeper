@@ -112,7 +112,3 @@ def refresh(widget, options):
 
     widget.label_5.setText(str(spendable_amount))
     widget.listWidget.addItems(addresses)
-    for i in range(widget.listWidget.count()):
-        item = widget.listWidget.item(i)
-        ch = QCheckBox()
-        widget.listWidget.setItemWidget(item, ch)
