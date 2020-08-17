@@ -1,7 +1,7 @@
 from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
     QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PyQt5.QtWidgets import (QDialogButtonBox, QDialog, QVBoxLayout, QFormLayout, QLabel, QToolButton, QPushButton, QListWidget, 
-    QFileDialog, QFrame, QLineEdit, QCheckBox, QProgressBar, QGroupBox, QComboBox, QListWidgetItem)
+    QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem)
 
 from logic import *
 from model import Options
@@ -104,10 +104,6 @@ class Dialog(QDialog):
         self.pushButton = QPushButton(self.frame_4)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(90, 20, 88, 28))
-        self.progressBar = QProgressBar(self.frame_4)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(50, 70, 172, 23))
-        self.progressBar.setValue(24)
         # Balance GroupBox
         self.groupBox = QGroupBox(self)
         self.groupBox.setObjectName(u"groupBox")
