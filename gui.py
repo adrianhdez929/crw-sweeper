@@ -25,7 +25,7 @@ class Dialog(QDialog):
         address_summary = connect(self, self.options)
         if address_summary.items():
             for address,info in address_summary.items():
-                addresses.append("%s %.8f %s"%(address, info['total'], info['account']))
+                addresses.append("%s\t%.8f\t%s"%(address, info['total'], info['account']))
                 spendable_amount += info['total']
 
         self.label_5.setText(str(spendable_amount))
