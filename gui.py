@@ -2,6 +2,7 @@ from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
     QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PyQt5.QtWidgets import (QDialogButtonBox, QDialog, QVBoxLayout, QFormLayout, QLabel, QToolButton, QPushButton, QListWidget, 
     QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem)
+from PyQt5.QtGui import (QFont)
 
 from logic import *
 from model import Options
@@ -25,7 +26,7 @@ class Dialog(QDialog):
         address_summary = connect(self, self.options)
         if address_summary.items():
             for address,info in address_summary.items():
-                addresses.append("%s\t%.8f\t%s"%(address, info['total'], info['account']))
+                addresses.append("%s   %.8f   %s"%(address, info['total'], info['account']))
                 spendable_amount += info['total']
 
         self.label_5.setText(str(spendable_amount))
@@ -62,6 +63,7 @@ class Dialog(QDialog):
         self.label_6 = QLabel(self.frame)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(10, 10, 71, 16))
+        self.label_6.setFont(QFont('Cantarell', 10))
         # Amount Frame
         self.frame_2 = QFrame(self)
         self.frame_2.setObjectName(u"frame_2")
@@ -74,6 +76,7 @@ class Dialog(QDialog):
         self.label_7 = QLabel(self.frame_2)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setGeometry(QRect(10, 10, 71, 16))
+        self.label_7.setFont(QFont('Cantarell', 10))
         self.checkBox_3 = QCheckBox(self.frame_2)
         self.checkBox_3.setObjectName(u"checkBox_3")
         self.checkBox_3.setGeometry(QRect(190, 10, 61, 21))
@@ -89,6 +92,7 @@ class Dialog(QDialog):
         self.label_3 = QLabel(self.frame_3)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(10, 10, 57, 16))
+        self.label_3.setFont(QFont('Cantarell', 10))
         self.checkBox = QCheckBox(self.frame_3)
         self.checkBox.setObjectName(u"checkBox")
         self.checkBox.setGeometry(QRect(190, 10, 71, 24))
@@ -111,23 +115,29 @@ class Dialog(QDialog):
         self.label_2 = QLabel(self.groupBox)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(10, 30, 57, 16))
+        self.label_2.setFont(QFont('Cantarell', 10))
         self.label = QLabel(self.groupBox)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(10, 70, 57, 16))
+        self.label.setFont(QFont('Cantarell', 10))
         self.label_5 = QLabel(self.groupBox)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(70, 30, 51, 16))
         self.label_5.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_5.setFont(QFont('Cantarell', 10))
         self.label_8 = QLabel(self.groupBox)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(70, 70, 51, 16))
         self.label_8.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_8.setFont(QFont('Cantarell', 10))
         self.label_10 = QLabel(self.groupBox)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setGeometry(QRect(130, 30, 31, 16))
+        self.label_10.setFont(QFont('Cantarell', 10))
         self.label_9 = QLabel(self.groupBox)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setGeometry(QRect(130, 70, 31, 16))
+        self.label_9.setFont(QFont('Cantarell', 10))
         # Order Frame
         self.frame_5 = QFrame(self)
         self.frame_5.setObjectName(u"frame_5")
@@ -142,6 +152,7 @@ class Dialog(QDialog):
         self.label_11 = QLabel(self.frame_5)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setGeometry(QRect(20, 0, 57, 16))
+        self.label_11.setFont(QFont('Cantarell', 10))
         # Address List Frame 
         self.frame_7 = QFrame(self)
         self.frame_7.setObjectName(u"frame_7")
@@ -152,15 +163,19 @@ class Dialog(QDialog):
         self.listWidget.setSelectionMode(QListWidget.MultiSelection)
         self.listWidget.setObjectName(u"listWidget")
         self.listWidget.setGeometry(QRect(10, 20, 421, 191))
+        self.listWidget.setFont(QFont('Monospace', 10))
         self.label_12 = QLabel(self.frame_7)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(10, 0, 51, 16))
+        self.label_12.setFont(QFont('Cantarell', 10))
         self.label_13 = QLabel(self.frame_7)
         self.label_13.setObjectName(u"label_13")
         self.label_13.setGeometry(QRect(300, 0, 51, 16))
+        self.label_13.setFont(QFont('Cantarell', 10))
         self.label_14 = QLabel(self.frame_7)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(380, 0, 31, 16))
+        self.label_14.setFont(QFont('Cantarell', 10))
         # Optional Frame
         self.frame_6 = QFrame(self)
         self.frame_6.setObjectName(u"frame_6")
@@ -209,6 +224,7 @@ class Notification(QDialog):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(30, 20, 251, 51))
         self.label.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
+        self.label.setFont(QFont('Cantarell', 10))
         self.pushButton = QPushButton(self)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(110, 90, 88, 28))
