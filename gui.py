@@ -21,16 +21,6 @@ class Dialog(QDialog):
             raise RuntimeError("Can't connect to crownd")
 
         refresh(self, self.options)
-        addresses = list()
-        spendable_amount = 0
-        address_summary = connect(self, self.options)
-        if address_summary.items():
-            for address,info in address_summary.items():
-                addresses.append("%s   %.8f   %s"%(address, info['total'], info['account']))
-                spendable_amount += info['total']
-
-        self.label_5.setText(str(spendable_amount))
-        self.listWidget.addItems(addresses)
 
         QMetaObject.connectSlotsByName(self)
     
