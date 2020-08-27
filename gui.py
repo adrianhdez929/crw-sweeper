@@ -41,6 +41,7 @@ class Dialog(QDialog):
         if not self.objectName():
             self.setObjectName(u"Dialog")
         self.resize(723, 369)
+        self.setFixedSize(723, 369)
         # To Address Frame
         self.frame = QFrame(self)
         self.frame.setObjectName(u"frame")
