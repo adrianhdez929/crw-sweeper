@@ -107,7 +107,7 @@ def refresh(widget, options):
     address_summary = connect(widget, options)
     if address_summary.items():
         for address,info in address_summary.items():
-            addresses.append("%s %.8f %s"%(address, info['total'], info['account']))
+            addresses.append("%s %.4f %s"%(address, info['total'], info['account']))
             spendable_amount += info['total']
 
     widget.label_5.setText(str(spendable_amount))

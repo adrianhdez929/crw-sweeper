@@ -17,10 +17,10 @@ class Dialog(QDialog):
         self.setupUI()
         self.hookElems()
         self.retranslateUI()
-        #if not try_conn(self, self.options):
-            #raise RuntimeError("Can't connect to crownd")
+        if not try_conn(self, self.options):
+            raise RuntimeError("Can't connect to crownd")
 
-        #refresh(self, self.options)
+        refresh(self, self.options)
 
         QMetaObject.connectSlotsByName(self)
     
