@@ -71,6 +71,7 @@ def selected_items(widget, options):
         item = item.text().split(" ")
         items.append(item[0])
         selected_amount += float(item[1])
+    selected_amount = round(float(selected_amount, 4))
     widget.parent().parent().label_8.setText(str(selected_amount))
     widget.parent().parent().lineEdit_7.setText(str(selected_amount))
     options.amount = str(selected_amount)
@@ -110,5 +111,6 @@ def refresh(widget, options):
             addresses.append("%s %.4f %s"%(address, info['total'], info['account']))
             spendable_amount += info['total']
 
+    spendable_amount = round(float(spendable_amount), 4)
     widget.label_5.setText(str(spendable_amount))
     widget.listWidget.addItems(addresses)
