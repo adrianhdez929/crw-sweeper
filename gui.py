@@ -200,6 +200,10 @@ class Dialog(QDialog):
         ntf = Notification(message)
         ntf.exec_()
 
+    def pswdask(self):
+        ask = PasswordPop(self)
+        ask.exec_()
+
 class Notification(QDialog):
     def __init__(self, message, parent=None):
         super().__init__(parent)
@@ -224,3 +228,51 @@ class Notification(QDialog):
         self.setWindowTitle(QCoreApplication.translate("Notification", u"Notification", None))
         self.pushButton.setText(u"Ok")
         self.label.setText(message)
+
+class PasswordPop(QDialog):
+    def __init__(self, parent):
+        self.setupUi()
+        self.hookElems()
+        self.retranslateUi()
+        self.parent = parent
+        if self.parent.options.pswdcanceled:
+            self.parent.options.pswdcanceled = False
+
+    def hookElems(self):
+        self.buttonBox.accepted.connect(self.getpswd)
+        self.buttonBox.rejected.connect(self.cancel)
+
+    def setupUi(self):
+        if not self.objectName():
+            self.setObjectName(u"Dialog")
+        self.resize(309, 137)
+        self.buttonBox = QDialogButtonBox(Dialog)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setGeometry(QRect(70, 90, 171, 31))
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.lineEdit = QLineEdit(Dialog)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setGeometry(QRect(70, 50, 171, 28))
+        self.lineEdit.setFrame(True)
+        self.lineEdit.setEchoMode(QLineEdit.Password)
+        self.label = QLabel(Dialog)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(10, 20, 291, 20))
+        self.label.setLayoutDirection(Qt.LeftToRight)
+        self.label.setAlignment(Qt.AlignCenter)
+
+        QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self):
+        self.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"Please enter your wallet passphrase:", None))
+
+    def getpswd(self):
+        self.parent.options.passphrase = self.lineEdit.text
+        self.accept()
+
+    def cancel(self):
+        self.parent.options.pswdcanceled = True
+        self.close()
+

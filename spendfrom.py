@@ -67,14 +67,13 @@ def connect_JSON(config):
         sys.stderr.write("Error connecting to RPC server at "+connect+"\n")
         sys.exit(1)
 
-def unlock_wallet(crownd):
+def unlock_wallet(crownd, passphrase):
     info = crownd.getinfo()
     if 'unlocked_until' not in info:
         return True # wallet is not encrypted
     t = int(info['unlocked_until'])
     if t <= time.time():
         try:
-            passphrase = getpass.getpass("Wallet is locked; enter passphrase: ")
             crownd.walletpassphrase(passphrase, 5)
         except:
             sys.stderr.write("Wrong passphrase\n")

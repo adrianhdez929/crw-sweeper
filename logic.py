@@ -52,8 +52,11 @@ def sweep(dialog, options):
     else:    
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)
-        while unlock_wallet(crownd) == False:
-            pass # Keep asking for passphrase until they get it right
+        dialog.pswdask()
+        while unlock_wallet(crownd, dialog.options.passphrase) == False:
+            if dialog.options.pswdcanceled:
+                return
+            dialog.pswdask()
         txdata = create_tx(crownd, options.fromaddresses, options.toaddress, amount, fee, options.select, options.upto)
         sanity_test_fee(crownd, txdata, amount*Decimal("0.01"), fee)
         txlen = len(txdata)/2
@@ -71,7 +74,7 @@ def selected_items(widget, options):
         item = item.text().split(" ")
         items.append(item[0])
         selected_amount += float(item[1])
-    selected_amount = round(float(selected_amount), 4))
+    selected_amount = round(float(selected_amount), 4)
     widget.parent().parent().label_8.setText(str(selected_amount))
     widget.parent().parent().lineEdit_7.setText(str(selected_amount))
     options.amount = str(selected_amount)
