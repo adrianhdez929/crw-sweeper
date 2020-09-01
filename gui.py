@@ -231,6 +231,7 @@ class Notification(QDialog):
 
 class PasswordPop(QDialog):
     def __init__(self, parent):
+        super().__init__(None)
         self.setupUi()
         self.hookElems()
         self.retranslateUi()
