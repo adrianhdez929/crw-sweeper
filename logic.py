@@ -113,4 +113,5 @@ def refresh(widget, options):
 
     spendable_amount = round(float(spendable_amount), 4)
     widget.label_5.setText(str(spendable_amount))
+    widget.listWidget.clear()
     widget.listWidget.addItems(addresses)
