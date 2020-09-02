@@ -52,7 +52,6 @@ def sweep(dialog, options):
     else:    
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)
-        dialog.pswdask()
         while unlock_wallet(crownd, dialog.options.passphrase) == False:
             if dialog.options.pswdcanceled:
                 return
