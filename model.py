@@ -5,10 +5,12 @@ class Options(object):
         self.fromaddresses = list()
         self.toaddress = None
         self.datadir = determine_db_dir()
-        self.conffile = "crown.conf"
+        self.config = "crown.conf"
         self.fee = "0.025"
         self.amount = None
         self.upto = None
         self.testnet = False
         self.dry_run = False
         self.select = None
+        self.passphrase = None
+        self.pswdcanceled = False
