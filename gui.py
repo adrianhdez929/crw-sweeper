@@ -203,6 +203,7 @@ class Dialog(QDialog):
     def pswdask(self):
         ask = PasswordPop(self)
         ask.exec_()
+        print('pswdask')
 
 class Notification(QDialog):
     def __init__(self, message, parent=None):
@@ -270,7 +271,7 @@ class PasswordPop(QDialog):
         self.label.setText(QCoreApplication.translate("Dialog", u"Please enter your wallet passphrase:", None))
 
     def getpswd(self):
-        self.parent.options.passphrase = self.lineEdit.text
+        self.parent.options.passphrase = self.lineEdit.text()
         self.accept()
 
     def cancel(self):
