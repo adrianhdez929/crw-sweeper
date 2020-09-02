@@ -247,23 +247,23 @@ class PasswordPop(QDialog):
         if not self.objectName():
             self.setObjectName(u"Dialog")
         self.resize(309, 137)
-        self.buttonBox = QDialogButtonBox(Dialog)
+        self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(70, 90, 171, 31))
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
-        self.lineEdit = QLineEdit(Dialog)
+        self.lineEdit = QLineEdit(self)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(70, 50, 171, 28))
         self.lineEdit.setFrame(True)
         self.lineEdit.setEchoMode(QLineEdit.Password)
-        self.label = QLabel(Dialog)
+        self.label = QLabel(self)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(10, 20, 291, 20))
         self.label.setLayoutDirection(Qt.LeftToRight)
         self.label.setAlignment(Qt.AlignCenter)
 
-        QMetaObject.connectSlotsByName(Dialog)
+        QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
         self.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
