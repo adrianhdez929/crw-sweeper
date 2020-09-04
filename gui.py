@@ -178,7 +178,6 @@ class Dialog(QDialog):
         self.label_3.setText(QCoreApplication.translate("self", u"Tx Fee", None))
         self.lineEdit_3.setText(QCoreApplication.translate("self", u"0.025", None))
         self.checkBox.setText(QCoreApplication.translate("self", u"Testnet", None))
-        self.checkBox_2.setText(QCoreApplication.translate("self", u"Dry Run", None))
         self.pushButton.setText(QCoreApplication.translate("self", u"Sweep", None))
         self.groupBox.setTitle(QCoreApplication.translate("self", u"Balance", None))
         self.label_2.setText(QCoreApplication.translate("self", u"Available:", None))

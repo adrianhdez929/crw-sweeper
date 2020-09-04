@@ -42,7 +42,7 @@ def sweep(dialog, options):
     #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
     #crownd.client.setopt(pycurl.PROXY, 'http://92.60.46.19/')
     #crownd.client.setopt(pycurl.PROXYPORT, 3128)
-    if options.toaddress.lower() == 'new':
+    if options.new:
         options.toaddress = crownd.getnewaddress('')
         #print("Sending to new address %s"%(options.toaddress))
     if options.toaddress is None:
