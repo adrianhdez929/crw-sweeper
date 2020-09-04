@@ -44,6 +44,7 @@ def sweep(dialog, options):
     #crownd.client.setopt(pycurl.PROXYPORT, 3128)
     if options.new:
         options.toaddress = crownd.getnewaddress('')
+        dialog.lineEdit_6.setText(options.toaddress)
         #print("Sending to new address %s"%(options.toaddress))
     if options.toaddress is None:
         return dialog.notify("You must specify a to address")
