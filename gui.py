@@ -1,7 +1,7 @@
 from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
     QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PyQt5.QtWidgets import (QDialogButtonBox, QDialog, QVBoxLayout, QFormLayout, QLabel, QToolButton, QPushButton, QListWidget, 
-    QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem)
+    QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem, QApplication)
 from PyQt5.QtGui import (QFont)
 
 from logic import *
@@ -28,7 +28,6 @@ class Dialog(QDialog):
         # OnClick
         self.pushButton.clicked.connect(partial(sweep, self, self.options))
         self.checkBox.clicked.connect(partial(get_checkbox, self.checkBox, self.options))
-        self.checkBox_2.clicked.connect(partial(get_checkbox, self.checkBox_2, self.options))
         self.checkBox_3.clicked.connect(partial(get_checkbox, self.checkBox_3, self.options))
         # OnEditFinished
         self.lineEdit_3.editingFinished.connect(partial(get_input, self.lineEdit_3, self.options))
@@ -55,6 +54,9 @@ class Dialog(QDialog):
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(10, 10, 81, 16))
         self.label_6.setFont(QFont('Cantarell', 10))
+        self.checkBox = QCheckBox(self.frame)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setGeometry(QRect(180, 10, 81, 24))
         # Amount Frame
         self.frame_2 = QFrame(self)
         self.frame_2.setObjectName(u"frame_2")
@@ -84,12 +86,6 @@ class Dialog(QDialog):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(10, 10, 57, 16))
         self.label_3.setFont(QFont('Cantarell', 10))
-        self.checkBox = QCheckBox(self.frame_3)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setGeometry(QRect(190, 10, 71, 24))
-        self.checkBox_2 = QCheckBox(self.frame_3)
-        self.checkBox_2.setObjectName(u"checkBox_2")
-        self.checkBox_2.setGeometry(QRect(190, 40, 71, 24))
         # Sweep Frame
         self.frame_4 = QFrame(self)
         self.frame_4.setObjectName(u"frame_4")
@@ -203,7 +199,10 @@ class Dialog(QDialog):
     def pswdask(self):
         ask = PasswordPop(self)
         ask.exec_()
-        print('pswdask')
+
+    def showtx(self, txid):
+        tx = TxPop(txid)
+        tx.exec_()
 
 class Notification(QDialog):
     def __init__(self, message, parent=None):
@@ -246,7 +245,7 @@ class PasswordPop(QDialog):
 
     def setupUi(self):
         if not self.objectName():
-            self.setObjectName(u"Dialog")
+            self.setObjectName(u"Password")
         self.resize(309, 137)
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setObjectName(u"buttonBox")
@@ -267,7 +266,7 @@ class PasswordPop(QDialog):
         QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
-        self.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        self.setWindowTitle(QCoreApplication.translate("Password", u"Password", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Please enter your wallet passphrase:", None))
 
     def getpswd(self):
@@ -278,3 +277,40 @@ class PasswordPop(QDialog):
         self.parent.options.pswdcanceled = True
         self.close()
 
+class TxPop(QDialog):
+    def __init__(self, txid, parent=None):
+        super().__init__(parent)
+        self.setupUi()
+        self.hookElems()
+        self.retranslateUi(txid)
+
+    def hookElems(self):
+        self.buttonBox.clicked.connect(self.copytoclip)
+        self.buttonBox.clicked.connect(self.accept)
+
+    def setupUi(self):
+        if not self.objectName():
+            self.setObjectName(u"Tx")
+        self.resize(400, 137)
+        self.pushButton = QPushButton(Dialog)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(90, 90, 88, 28))
+        self.pushButton_2 = QPushButton(Dialog)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(210, 90, 88, 28))
+        self.label = QLabel(self)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(6, 30, 391, 21))
+            
+        QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, txid):
+        self.setWindowTitle(QCoreApplication.translate("Tx", u"Tx", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"".join(txid), None))
+        self.pushButton.setText(QCoreApplication.translate("Dialog", u"Copy", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Dialog", u"Close", None))
+
+    def copytoclip(self):
+        cb = QApplication.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(self.label.text(), mode=cb.Clipboard)
