@@ -224,7 +224,7 @@ class Notification(QDialog):
         self.pushButton.clicked.connect(self.accept)
 
     def retranslateUI(self, message):
-        self.setWindowTitle(QCoreApplication.translate("Notification", u"Notification", None))
+        self.setWindowTitle(QCoreApplication.translate("self", u"Notification", None))
         self.pushButton.setText(u"Ok")
         self.label.setText(message)
 
@@ -265,8 +265,8 @@ class PasswordPop(QDialog):
         QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
-        self.setWindowTitle(QCoreApplication.translate("Password", u"Password", None))
-        self.label.setText(QCoreApplication.translate("Dialog", u"Please enter your wallet passphrase:", None))
+        self.setWindowTitle(QCoreApplication.translate("self", u"Password", None))
+        self.label.setText(QCoreApplication.translate("self", u"Please enter your wallet passphrase:", None))
 
     def getpswd(self):
         self.parent.options.passphrase = self.lineEdit.text()
@@ -291,23 +291,23 @@ class TxPop(QDialog):
         if not self.objectName():
             self.setObjectName(u"Tx")
         self.resize(400, 137)
-        self.pushButton = QPushButton(Dialog)
+        self.pushButton = QPushButton(self)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(90, 90, 88, 28))
-        self.pushButton_2 = QPushButton(Dialog)
+        self.pushButton_2 = QPushButton(self)
         self.pushButton_2.setObjectName(u"pushButton_2")
         self.pushButton_2.setGeometry(QRect(210, 90, 88, 28))
         self.label = QLabel(self)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(6, 30, 391, 21))
             
-        QMetaObject.connectSlotsByName(Dialog)
+        QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, txid):
-        self.setWindowTitle(QCoreApplication.translate("Tx", u"Tx", None))
-        self.label.setText(QCoreApplication.translate("Dialog", u"".join(txid), None))
-        self.pushButton.setText(QCoreApplication.translate("Dialog", u"Copy", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Dialog", u"Close", None))
+        self.setWindowTitle(QCoreApplication.translate("self", u"Tx", None))
+        self.label.setText(QCoreApplication.translate("self", u"".join(txid), None))
+        self.pushButton.setText(QCoreApplication.translate("self", u"Copy", None))
+        self.pushButton_2.setText(QCoreApplication.translate("self", u"Close", None))
 
     def copytoclip(self):
         cb = QApplication.clipboard()
