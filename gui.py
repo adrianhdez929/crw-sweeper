@@ -84,12 +84,6 @@ class Dialog(QDialog):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(10, 10, 57, 16))
         self.label_3.setFont(QFont('Cantarell', 10))
-        self.checkBox = QCheckBox(self.frame_3)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setGeometry(QRect(190, 10, 71, 24))
-        self.checkBox_2 = QCheckBox(self.frame_3)
-        self.checkBox_2.setObjectName(u"checkBox_2")
-        self.checkBox_2.setGeometry(QRect(190, 40, 71, 24))
         # Sweep Frame
         self.frame_4 = QFrame(self)
         self.frame_4.setObjectName(u"frame_4")
