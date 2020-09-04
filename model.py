@@ -4,6 +4,7 @@ class Options(object):
     def __init__(self):
         self.fromaddresses = list()
         self.toaddress = None
+        self.new = False
         self.datadir = determine_db_dir()
         self.config = "crown.conf"
         self.fee = "0.025"

@@ -42,11 +42,11 @@ def sweep(dialog, options):
     #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
     #crownd.client.setopt(pycurl.PROXY, 'http://92.60.46.19/')
     #crownd.client.setopt(pycurl.PROXYPORT, 3128)
+    if options.toaddress.lower() == 'new':
+        options.toaddress = crownd.getnewaddress('')
+        #print("Sending to new address %s"%(options.toaddress))
     if options.toaddress is None:
         return dialog.notify("You must specify a to address")
-        #if options.toaddress.lower() == 'new':
-        #    options.toaddress = crownd.getnewaddress('')
-        #    print("Sending to new address %s"%(options.toaddress))
     if not (crownd.validateaddress(options.toaddress))['isvalid']:
         return dialog.notify("To address is invalid")
     else:    
@@ -95,14 +95,9 @@ def get_checkbox(widget, options):
     value = False if widget.checkState() == 0 else True
 
     if widget.objectName() == 'checkBox':
-        options.testnet = value
-        print(options.testnet)
-    elif widget.objectName() == 'checkBox_2':
-        options.dry_run = value
-        print(options.dry_run)
+        options.new = value
     elif widget.objectName() == 'checkBox_3':
         options.upto = value
-        print(options.upto)
     
 def refresh(widget, options):
     addresses = list()

@@ -28,7 +28,6 @@ class Dialog(QDialog):
         # OnClick
         self.pushButton.clicked.connect(partial(sweep, self, self.options))
         self.checkBox.clicked.connect(partial(get_checkbox, self.checkBox, self.options))
-        self.checkBox_2.clicked.connect(partial(get_checkbox, self.checkBox_2, self.options))
         self.checkBox_3.clicked.connect(partial(get_checkbox, self.checkBox_3, self.options))
         # OnEditFinished
         self.lineEdit_3.editingFinished.connect(partial(get_input, self.lineEdit_3, self.options))
@@ -55,6 +54,9 @@ class Dialog(QDialog):
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(10, 10, 81, 16))
         self.label_6.setFont(QFont('Cantarell', 10))
+        self.checkBox = QCheckBox(self.frame)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setGeometry(QRect(180, 10, 81, 24))
         # Amount Frame
         self.frame_2 = QFrame(self)
         self.frame_2.setObjectName(u"frame_2")
