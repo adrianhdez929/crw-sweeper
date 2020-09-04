@@ -16,10 +16,10 @@ class Dialog(QDialog):
         self.setupUI()
         self.hookElems()
         self.retranslateUI()
-        #if not try_conn(self, self.options):
-        #    raise RuntimeError("Can't connect to crownd")
+        if not try_conn(self, self.options):
+            raise RuntimeError("Can't connect to crownd")
 
-        #refresh(self, self.options)
+        refresh(self, self.options)
 
         QMetaObject.connectSlotsByName(self)
     
@@ -39,7 +39,7 @@ class Dialog(QDialog):
 
     def setupUI(self):
         if not self.objectName():
-            self.setObjectName(u"Dialog")
+            self.setObjectName(u"Sweeper")
         self.resize(800, 370)
         self.setFixedSize(800, 370)
         # To Address Frame
@@ -152,7 +152,6 @@ class Dialog(QDialog):
         self.listWidget.setGeometry(QRect(10, 20, 421, 191))
         self.listWidget.setFont(QFont('Monospace', 10))
         self.listWidget.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.listWidget.addItems(['asd', '123', 'a1b2c3'])
         self.label_12 = QLabel(self.frame_7)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(10, 0, 71, 16))
