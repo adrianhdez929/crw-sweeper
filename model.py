@@ -6,7 +6,7 @@ class Options(object):
         self.toaddress = None
         self.new = False
         self.datadir = determine_db_dir()
-        self.config = "crown.conf"
+        self.conffile = "crown.conf"
         self.fee = "0.025"
         self.amount = None
         self.upto = None
