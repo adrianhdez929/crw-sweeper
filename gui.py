@@ -284,8 +284,8 @@ class TxPop(QDialog):
         self.retranslateUi(txid)
 
     def hookElems(self):
-        self.buttonBox.clicked.connect(self.copytoclip)
-        self.buttonBox.clicked.connect(self.accept)
+        self.pushButton.clicked.connect(self.copytoclip)
+        self.pushButton_2.clicked.connect(self.accept)
 
     def setupUi(self):
         if not self.objectName():
