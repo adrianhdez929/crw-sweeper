@@ -62,7 +62,7 @@ def sweep(dialog, options):
         if txlen < 250000:
             txid = crownd.sendrawtransaction(txdata)
             refresh(dialog, options)
-            return dialog.notify(txid)
+            return dialog.showtx(txid)
         else:
             return dialog.notify("Transaction size is too large")
 
