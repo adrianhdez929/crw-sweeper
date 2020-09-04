@@ -164,12 +164,6 @@ class Dialog(QDialog):
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(360, 0, 51, 16))
         self.label_14.setFont(QFont('Cantarell', 10))
-        # Optional Frame
-        self.frame_6 = QFrame(self)
-        self.frame_6.setObjectName(u"frame_6")
-        self.frame_6.setGeometry(QRect(450, 300, 261, 51))
-        self.frame_6.setFrameShape(QFrame.StyledPanel)
-        self.frame_6.setFrameShadow(QFrame.Raised)
 
     def retranslateUI(self):
         self.setWindowTitle(QCoreApplication.translate("self", u"Sweeper", None))
