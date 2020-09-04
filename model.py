@@ -13,3 +13,4 @@ class Options(object):
         self.select = None
         self.passphrase = None
         self.pswdcanceled = False
+        self.testnet = False
