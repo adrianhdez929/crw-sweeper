@@ -1,8 +1,7 @@
-from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PyQt5.QtWidgets import (QDialogButtonBox, QDialog, QVBoxLayout, QFormLayout, QLabel, QToolButton, QPushButton, QListWidget, 
-    QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem, QApplication)
-from PyQt5.QtGui import (QFont)
+    QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem, QApplication, QMenu, QAction)
+from PyQt5.QtGui import (QFont, QCursor)
 
 from logic import *
 from model import Options
@@ -35,10 +34,12 @@ class Dialog(QDialog):
         self.lineEdit_6.editingFinished.connect(partial(get_input, self.lineEdit_6, self.options))
         # OnItemSelection
         self.listWidget.itemSelectionChanged.connect(partial(selected_items, self.listWidget, self.options))
+        # OnRightClick
+        self.listWidget.customContextMenuRequested.connect(self.listItemRightClicked)
 
     def setupUI(self):
         if not self.objectName():
-            self.setObjectName(u"Dialog")
+            self.setObjectName(u"Sweeper")
         self.resize(800, 370)
         self.setFixedSize(800, 370)
         # To Address Frame
@@ -150,6 +151,7 @@ class Dialog(QDialog):
         self.listWidget.setObjectName(u"listWidget")
         self.listWidget.setGeometry(QRect(10, 20, 421, 191))
         self.listWidget.setFont(QFont('Monospace', 10))
+        self.listWidget.setContextMenuPolicy(Qt.CustomContextMenu)
         self.label_12 = QLabel(self.frame_7)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(10, 0, 71, 16))
@@ -162,12 +164,6 @@ class Dialog(QDialog):
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(360, 0, 51, 16))
         self.label_14.setFont(QFont('Cantarell', 10))
-        # Optional Frame
-        self.frame_6 = QFrame(self)
-        self.frame_6.setObjectName(u"frame_6")
-        self.frame_6.setGeometry(QRect(450, 300, 261, 51))
-        self.frame_6.setFrameShape(QFrame.StyledPanel)
-        self.frame_6.setFrameShadow(QFrame.Raised)
 
     def retranslateUI(self):
         self.setWindowTitle(QCoreApplication.translate("self", u"Sweeper", None))
@@ -191,6 +187,25 @@ class Dialog(QDialog):
         self.label_13.setText(QCoreApplication.translate("self", u"Amount", None))
         self.label_14.setText(QCoreApplication.translate("self", u"Label", None))
     
+    def listItemRightClicked(self): 
+        self.listMenu = QMenu()
+        self.actions = [QAction("Copy"), QAction("Set Destination")]
+        self.listMenu.addActions(self.actions)
+        self.actions[0].triggered.connect(self.actionCopy)
+        self.actions[1].triggered.connect(self.actionDest)
+        self.listMenu.exec_(QCursor.pos())
+
+    def actionCopy(self):
+        cb = QApplication.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(str(self.listWidget.currentItem().text().split(' ')[0]), mode=cb.Clipboard)
+        self.listMenu.close()
+
+    def actionDest(self):
+        self.lineEdit_6.setText(str(self.listWidget.currentItem().text().split(' ')[0]))
+        self.options.toaddress = str(self.listWidget.currentItem().text().split(' ')[0])
+        self.listMenu.close()
+
     def notify(self, message):
         ntf = Notification(message)
         ntf.exec_()
