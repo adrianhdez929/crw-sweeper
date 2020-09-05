@@ -134,7 +134,7 @@ class Dialog(QDialog):
         self.comboBox = QComboBox(self.frame_5)
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(10, 20, 78, 28))
-        ordering = ['Newest', 'Oldest', 'Smallest', 'Largest']
+        ordering = ['Largest', 'Smallest', 'Label']
         self.comboBox.addItems(ordering)
         self.label_11 = QLabel(self.frame_5)
         self.label_11.setObjectName(u"label_11")
