@@ -106,10 +106,26 @@ def refresh(widget, options):
     address_summary = connect(widget, options)
     if address_summary.items():
         for address,info in address_summary.items():
-            addresses.append("%s %.4f %s"%(address, info['total'], info['account']))
+            n_transactions = len(info['outputs'])
+            elem = {
+                'data': "%s %.4f %s (%s)"%(address, info['total'], info['account'], str(n_transactions)),
+                'label': info['account'],
+                'amount': info['total'],
+            }
+            addresses.append(elem)
             spendable_amount += info['total']
 
     spendable_amount = round(float(spendable_amount), 4)
+    order(addresses, widget.comboBox.currentText())
     widget.label_5.setText(str(spendable_amount))
     widget.listWidget.clear()
-    widget.listWidget.addItems(addresses)
+    for address in addresses:
+        widget.listWidget.addItem(address['data'])
+
+def order(addresses, by):
+    if by == 'Smallest':
+        addresses.sort(key=lambda k: k['amount'])
+    elif by == 'Largest':
+        addresses.sort(key=lambda k: k['amount'], reverse=True)
+    elif by == 'Label':
+        addresses.sort(key=lambda k: k['label'])
