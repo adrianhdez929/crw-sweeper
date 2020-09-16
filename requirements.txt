@@ -2,3 +2,4 @@ PyQt5==5.15.0
 PyQt5-sip==12.8.0
 PyQtWebEngine==5.15.0
 python-bitcoinrpc==1.0
+PyInstaller==3.6

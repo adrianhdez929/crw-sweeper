@@ -34,6 +34,7 @@ class Dialog(QDialog):
         self.lineEdit_6.editingFinished.connect(partial(get_input, self.lineEdit_6, self.options))
         # OnItemSelection
         self.listWidget.itemSelectionChanged.connect(partial(selected_items, self.listWidget, self.options))
+        self.comboBox.currentIndexChanged.connect(partial(refresh, self, self.options))
         # OnRightClick
         self.listWidget.customContextMenuRequested.connect(self.listItemRightClicked)
 
@@ -74,6 +75,7 @@ class Dialog(QDialog):
         self.checkBox_3 = QCheckBox(self.frame_2)
         self.checkBox_3.setObjectName(u"checkBox_3")
         self.checkBox_3.setGeometry(QRect(250, 10, 81, 21))
+        self.checkBox_3.setChecked()
         # Fee Frame
         self.frame_3 = QFrame(self)
         self.frame_3.setObjectName(u"frame_3")
@@ -194,7 +196,7 @@ class Dialog(QDialog):
         self.actions[0].triggered.connect(self.actionCopy)
         self.actions[1].triggered.connect(self.actionDest)
         self.listMenu.exec_(QCursor.pos())
-
+        
     def actionCopy(self):
         cb = QApplication.clipboard()
         cb.clear(mode=cb.Clipboard)
