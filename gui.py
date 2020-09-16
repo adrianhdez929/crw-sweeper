@@ -75,6 +75,7 @@ class Dialog(QDialog):
         self.checkBox_3 = QCheckBox(self.frame_2)
         self.checkBox_3.setObjectName(u"checkBox_3")
         self.checkBox_3.setGeometry(QRect(250, 10, 81, 21))
+        self.checkBox_3.setChecked()
         # Fee Frame
         self.frame_3 = QFrame(self)
         self.frame_3.setObjectName(u"frame_3")
