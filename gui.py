@@ -1,11 +1,12 @@
 from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PyQt5.QtWidgets import (QDialogButtonBox, QDialog, QVBoxLayout, QFormLayout, QLabel, QToolButton, QPushButton, QListWidget, 
     QFileDialog, QFrame, QLineEdit, QCheckBox, QGroupBox, QComboBox, QListWidgetItem, QApplication, QMenu, QAction)
-from PyQt5.QtGui import (QFont, QCursor)
+from PyQt5.QtGui import (QFont, QCursor, QIcon)
 
 from logic import *
 from model import Options
 from functools import partial
+import os
 
 
 class Dialog(QDialog):
@@ -28,6 +29,7 @@ class Dialog(QDialog):
         self.pushButton.clicked.connect(partial(sweep, self, self.options))
         self.checkBox.clicked.connect(partial(get_checkbox, self.checkBox, self.options))
         self.checkBox_3.clicked.connect(partial(get_checkbox, self.checkBox_3, self.options))
+        self.pushButton_2.clicked.connect(self.about)
         # OnEditFinished
         self.lineEdit_3.editingFinished.connect(partial(get_input, self.lineEdit_3, self.options))
         self.lineEdit_7.editingFinished.connect(partial(get_input, self.lineEdit_7, self.options))
@@ -43,6 +45,8 @@ class Dialog(QDialog):
             self.setObjectName(u"Sweeper")
         self.resize(800, 370)
         self.setFixedSize(800, 370)
+        repoDir = os.path.dirname(os.path.realpath(__file__))
+        self.setWindowIcon(QIcon('sweeper.ico'))
         # To Address Frame
         self.frame = QFrame(self)
         self.frame.setObjectName(u"frame")
@@ -166,6 +170,11 @@ class Dialog(QDialog):
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(360, 0, 51, 16))
         self.label_14.setFont(QFont('Cantarell', 10))
+        # About Button
+        self.pushButton_2 = QPushButton(self)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(690, 340, 88, 21))
+
 
     def retranslateUI(self):
         self.setWindowTitle(QCoreApplication.translate("self", u"Crown Sweeper v0.1.0 beta", None))
@@ -188,6 +197,7 @@ class Dialog(QDialog):
         self.label_12.setText(QCoreApplication.translate("self", u"Address", None))
         self.label_13.setText(QCoreApplication.translate("self", u"Amount", None))
         self.label_14.setText(QCoreApplication.translate("self", u"Label", None))
+        self.pushButton_2.setText(QCoreApplication.translate("self", u"About", None))
     
     def listItemRightClicked(self): 
         self.listMenu = QMenu()
@@ -219,6 +229,10 @@ class Dialog(QDialog):
     def showtx(self, txid):
         tx = TxPop(txid)
         tx.exec_()
+
+    def about(self):
+        dlg = About()
+        dlg.exec_()
 
 class Notification(QDialog):
     def __init__(self, message, parent=None):
@@ -330,3 +344,52 @@ class TxPop(QDialog):
         cb = QApplication.clipboard()
         cb.clear(mode=cb.Clipboard)
         cb.setText(self.label.text(), mode=cb.Clipboard)
+
+class About(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi()
+        self.retranslateUi()
+        self.hookElems()
+
+    def hookElems(self):
+        self.pushButton.clicked.connect(self.accept)
+
+    def setupUi(self):
+        if not self.objectName():
+            self.setObjectName(u"About")
+        self.resize(358, 300)
+        self.label = QLabel(self)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(10, 20, 341, 16))
+        self.label.setAlignment(Qt.AlignCenter)
+        self.label_2 = QLabel(self)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(10, 70, 341, 20))
+        self.label_2.setAlignment(Qt.AlignCenter)
+        self.label_3 = QLabel(self)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setGeometry(QRect(10, 110, 341, 16))
+        self.label_3.setAlignment(Qt.AlignCenter)
+        self.label_4 = QLabel(self)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setGeometry(QRect(10, 170, 341, 16))
+        self.label_4.setAlignment(Qt.AlignCenter)
+        self.label_5 = QLabel(self)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setGeometry(QRect(10, 200, 341, 16))
+        self.label_5.setAlignment(Qt.AlignCenter)
+        self.pushButton = QPushButton(self)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(140, 250, 88, 28))
+        
+        QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        self.setWindowTitle(QCoreApplication.translate("self", u"About", None))
+        self.label.setText(QCoreApplication.translate("self", u"Crown Sweeper v0.1.0 beta", None))
+        self.label_2.setText(QCoreApplication.translate("self", u"(c) Copyright 2020 The Crown Developers", None))
+        self.label_3.setText(QCoreApplication.translate("self", u"Released under the MIT License.", None))
+        self.label_4.setText(QCoreApplication.translate("self", u"Icon based on a broom icon in the \"Stay at home\" pack", None))
+        self.label_5.setText(QCoreApplication.translate("self", u"by Freepik at Flaticon.com", None))
+        self.pushButton.setText(QCoreApplication.translate("self", u"Close", None))
