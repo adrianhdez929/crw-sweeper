@@ -168,7 +168,7 @@ class Dialog(QDialog):
         self.label_14.setFont(QFont('Cantarell', 10))
 
     def retranslateUI(self):
-        self.setWindowTitle(QCoreApplication.translate("self", u"Sweeper", None))
+        self.setWindowTitle(QCoreApplication.translate("self", u"Crown Sweeper v0.1.0 beta", None))
         self.label_6.setText(QCoreApplication.translate("self", u"To Address", None))
         self.label_7.setText(QCoreApplication.translate("self", u"Amount", None))
         self.lineEdit_7.setText(QCoreApplication.translate("self", u"0", None))
