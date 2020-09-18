@@ -358,6 +358,7 @@ class About(QDialog):
     def setupUi(self):
         if not self.objectName():
             self.setObjectName(u"About")
+        self.setWindowIcon(QIcon('sweeper.ico'))
         self.resize(358, 300)
         self.label = QLabel(self)
         self.label.setObjectName(u"label")
@@ -390,6 +391,6 @@ class About(QDialog):
         self.label.setText(QCoreApplication.translate("self", u"Crown Sweeper v0.1.0 beta", None))
         self.label_2.setText(QCoreApplication.translate("self", u"(c) Copyright 2020 The Crown Developers", None))
         self.label_3.setText(QCoreApplication.translate("self", u"Released under the MIT License.", None))
-        self.label_4.setText(QCoreApplication.translate("self", u"Icon based on a broom icon in the \"Stay at home\" pack", None))
-        self.label_5.setText(QCoreApplication.translate("self", u"by Freepik at Flaticon.com", None))
+        self.label_4.setText(QCoreApplication.translate("self", u"Sweeper icon based on work by", None))
+        self.label_5.setText(QCoreApplication.translate("self", u"Freepik at Flaticon.com", None))
         self.pushButton.setText(QCoreApplication.translate("self", u"Close", None))

@@ -1,8 +1,0 @@
-Crown Sweeper v0.1.0 beta
-
-(c) Copyright 2020 The Crown Developers
-
-Released under the MIT License.
-
-Icon based on a broom icon in the "Stay at home" pack by 
-Freepik at Flaticon.com
