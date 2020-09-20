@@ -7,12 +7,8 @@ from PyQt5.QtWidgets import QCheckBox
 def try_conn(dialog, options):
     try:
         config = read_bitcoin_config(options.datadir, options.conffile)
-        #print("Using %s and %s"%(config['rpcuser'], config['rpcpassword']))
         if options.testnet: config['testnet'] = True
         crownd = connect_JSON(config)
-        #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
-        #crownd.client.setopt(pycurl.PROXY, 'http://92.60.46.19/')
-        #crownd.client.setopt(pycurl.PROXYPORT, 3128)
         crownd.getinfo()
     except Exception:
         return False
@@ -24,9 +20,6 @@ def connect(dialog, options):
         config = read_bitcoin_config(options.datadir, options.conffile)
         if options.testnet: config['testnet'] = True
         crownd = connect_JSON(config)
-        #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
-        #crownd.client.setopt(pycurl.PROXY, 'http://92.60.46.19/')
-        #crownd.client.setopt(pycurl.PROXYPORT, 3128)
     except Exception:
         return False
     else:
@@ -39,13 +32,9 @@ def sweep(dialog, options):
     config = read_bitcoin_config(options.datadir,options.conffile)
     if options.testnet: config['testnet'] = True
     crownd = connect_JSON(config)
-    #crownd = Client('crowncoinadrianrpc', 'LGzq9yTUZRyt72hd736T0FJgt5gdkj83yiMJsgt6ehfwt5DYFKO9HknLXawTUpqX3', '92.60.46.31')
-    #crownd.client.setopt(pycurl.PROXY, 'http://92.60.46.19/')
-    #crownd.client.setopt(pycurl.PROXYPORT, 3128)
     if options.new:
         options.toaddress = crownd.getnewaddress('')
-        dialog.lineEdit_6.setText(options.toaddress)
-        #print("Sending to new address %s"%(options.toaddress))
+        dialog.to_address_edit.setText(options.toaddress)
     if options.toaddress is None:
         return dialog.notify("You must specify a to address")
     if not (crownd.validateaddress(options.toaddress))['isvalid']:
@@ -75,8 +64,8 @@ def selected_items(widget, options):
         items.append(item[0])
         selected_amount += float(item[1])
     selected_amount = round(float(selected_amount), 4)
-    widget.parent().parent().label_8.setText(str(selected_amount))
-    widget.parent().parent().lineEdit_7.setText(str(selected_amount))
+    widget.parent().parent().selected_label.setText(str(selected_amount))
+    widget.parent().parent().amount_edit.setText(str(selected_amount))
     options.amount = str(selected_amount)
     options.fromaddresses = items
 
@@ -85,19 +74,19 @@ def selected_items(widget, options):
 def get_input(widget, options):
     text = widget.text()
     
-    if widget.objectName() == 'lineEdit_3':
+    if widget.objectName() == 'fee_edit':
         options.fee = text
-    elif widget.objectName() == 'lineEdit_7':
+    elif widget.objectName() == 'amount_edit':
         options.amount = text
-    elif widget.objectName() == 'lineEdit_6':
+    elif widget.objectName() == 'to_address_edit':
         options.toaddress = text
 
 def get_checkbox(widget, options):
     value = False if widget.checkState() == 0 else True
 
-    if widget.objectName() == 'checkBox':
+    if widget.objectName() == 'new_address_checkbox':
         options.new = value
-    elif widget.objectName() == 'checkBox_3':
+    elif widget.objectName() == 'upto_checkbox':
         options.upto = value
     
 def refresh(widget, options):
@@ -116,8 +105,8 @@ def refresh(widget, options):
             spendable_amount += info['total']
 
     spendable_amount = round(float(spendable_amount), 4)
-    order(addresses, widget.comboBox.currentText())
-    widget.label_5.setText(str(spendable_amount))
+    order(addresses, widget.order_combobox.currentText())
+    widget.available_label.setText(str(spendable_amount))
     widget.listWidget.clear()
     for address in addresses:
         widget.listWidget.addItem(address['data'])
