@@ -214,8 +214,8 @@ class Dialog(QDialog):
         self.listMenu.close()
 
     def actionDest(self):
-        self.lineEdit_6.setText(str(self.listWidget.currentItem().text().split(' ')[0]))
-        self.options.toaddress = str(self.listWidget.currentItem().text().split(' ')[0])
+        self.to_address_edit.setText(str(self.address_list_widget.currentItem().text().split(' ')[0]))
+        self.options.toaddress = str(self.address_list_widget.currentItem().text().split(' ')[0])
         self.listMenu.close()
 
     def notify(self, message):
