@@ -27,15 +27,15 @@ class Dialog(QDialog):
     def hookElems(self):
         # OnClick
         self.sweep_button.clicked.connect(partial(sweep, self, self.options))
-        self.new_address_checkbox.clicked.connect(partial(get_checkbox, self.checkBox, self.options))
-        self.upto_checkbox.clicked.connect(partial(get_checkbox, self.checkBox_3, self.options))
+        self.new_address_checkbox.clicked.connect(partial(get_checkbox, self.new_address_checkbox, self.options))
+        self.upto_checkbox.clicked.connect(partial(get_checkbox, self.upto_checkbox, self.options))
         self.about_button.clicked.connect(self.about)
         # OnEditFinished
         self.fee_edit.editingFinished.connect(partial(get_input, self.fee_edit, self.options))
         self.amout_edit.editingFinished.connect(partial(get_input, self.amount_edit, self.options))
         self.to_address_edit.editingFinished.connect(partial(get_input, self.to_address_edit, self.options))
         # OnItemSelection
-        self.address_list_widget.itemSelectionChanged.connect(partial(selected_items, self.listWidget, self.options))
+        self.address_list_widget.itemSelectionChanged.connect(partial(selected_items, self.address_list_widget, self.options))
         self.order_combo_box.currentIndexChanged.connect(partial(refresh, self, self.options))
         # OnRightClick
         self.address_list_widget.customContextMenuRequested.connect(self.listItemRightClicked)
