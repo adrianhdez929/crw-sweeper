@@ -105,9 +105,9 @@ def refresh(widget, options):
     spendable_amount = round(float(spendable_amount), 4)
     order(addresses, widget.order_combobox.currentText())
     widget.available_label.setText(str(spendable_amount))
-    widget.listWidget.clear()
+    widget.address_list_widget.clear()
     for address in addresses:
-        widget.listWidget.addItem(address['data'])
+        widget.address_list_widget.addItem(address['data'])
 
 def order(addresses, by):
     if by == 'Smallest':
