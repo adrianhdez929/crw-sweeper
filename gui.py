@@ -36,7 +36,7 @@ class Dialog(QDialog):
         self.to_address_edit.editingFinished.connect(partial(get_input, self.to_address_edit, self.options))
         # OnItemSelection
         self.address_list_widget.itemSelectionChanged.connect(partial(selected_items, self.address_list_widget, self.options))
-        self.order_combo_box.currentIndexChanged.connect(partial(refresh, self, self.options))
+        self.order_combobox.currentIndexChanged.connect(partial(refresh, self, self.options))
         # OnRightClick
         self.address_list_widget.customContextMenuRequested.connect(self.listItemRightClicked)
 
