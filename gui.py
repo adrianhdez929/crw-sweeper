@@ -32,7 +32,7 @@ class Dialog(QDialog):
         self.about_button.clicked.connect(self.about)
         # OnEditFinished
         self.fee_edit.editingFinished.connect(partial(get_input, self.fee_edit, self.options))
-        self.amout_edit.editingFinished.connect(partial(get_input, self.amount_edit, self.options))
+        self.amount_edit.editingFinished.connect(partial(get_input, self.amount_edit, self.options))
         self.to_address_edit.editingFinished.connect(partial(get_input, self.to_address_edit, self.options))
         # OnItemSelection
         self.address_list_widget.itemSelectionChanged.connect(partial(selected_items, self.address_list_widget, self.options))
