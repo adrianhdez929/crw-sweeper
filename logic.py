@@ -1,7 +1,5 @@
 from spendfrom import *
 from PyQt5.QtWidgets import QCheckBox
-#from crown_pycurl.client import Client
-#import pycurl
 
 
 def try_conn(dialog, options):
