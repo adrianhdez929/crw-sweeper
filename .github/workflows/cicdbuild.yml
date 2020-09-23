@@ -1,0 +1,88 @@
+name: Build
+
+on: [push]
+  
+jobs:
+  linux-build:
+    name: Build Linux Asset
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install dependencies
+        run: |
+          apt-cache policy fontconfig 
+          python -m pip install --upgrade pip
+
+      - name: Build
+        run: ./run.sh
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: sweeper-linux
+          path: |
+            dist/CrownSweeper
+
+
+  osx-build:
+    name: Build OSX Asset
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Build
+        run: ./run.sh
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: sweeper-osx
+          path: |
+            dist/*
+            CrownSweeper.spec
+          
+          
+  windows-build:
+    name: Build Windows Asset
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Build
+        run: |
+          python.exe -m pip install --upgrade pip
+          pip install virtualenv
+          mkdir venv
+          python.exe -m virtualenv venv
+          .\venv\Scripts\activate.bat
+          pip3 install -r requirements.txt
+          pyinstaller --debug --onefile -i sweeper.ico -n CrownSweeper sweeper.py 
+          dir dist
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: sweeper-windows
+          path: |
+            dist\*
+            CrownSweeper.spec
