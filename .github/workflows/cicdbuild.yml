@@ -76,7 +76,7 @@ jobs:
           python.exe -m virtualenv venv
           .\venv\Scripts\activate.bat
           pip3 install -r requirements.txt
-          pyinstaller --debug --onefile -i sweeper.ico -n CrownSweeper sweeper.py 
+          pyinstaller --debug=all --onefile -i sweeper.ico -n CrownSweeper sweeper.py 
           dir dist
 
       - name: Upload artifact
