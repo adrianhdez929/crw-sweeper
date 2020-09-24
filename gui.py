@@ -34,6 +34,7 @@ class Dialog(QDialog):
         self.fee_edit.editingFinished.connect(partial(get_input, self.fee_edit, self.options))
         self.amount_edit.editingFinished.connect(partial(get_input, self.amount_edit, self.options))
         self.to_address_edit.editingFinished.connect(partial(get_input, self.to_address_edit, self.options))
+        self.to_address_edit.editingFinished.connect(self.hideNewCheckbox)
         # OnItemSelection
         self.address_list_widget.itemSelectionChanged.connect(partial(selected_items, self.address_list_widget, self.options))
         self.order_combobox.currentIndexChanged.connect(partial(refresh, self, self.options))
@@ -199,6 +200,9 @@ class Dialog(QDialog):
         self.address_list_label_label.setText(QCoreApplication.translate("self", u"Label", None))
         self.about_button.setText(QCoreApplication.translate("self", u"About", None))
     
+    def hideNewCheckbox(self):
+        self.new_address_checkbox.setVisible(False)
+
     def listItemRightClicked(self): 
         self.listMenu = QMenu()
         self.actions = [QAction("Copy"), QAction("Set Destination")]
@@ -216,6 +220,7 @@ class Dialog(QDialog):
     def actionDest(self):
         self.to_address_edit.setText(str(self.address_list_widget.currentItem().text().split(' ')[0]))
         self.options.toaddress = str(self.address_list_widget.currentItem().text().split(' ')[0])
+        self.new_address_checkbox.setVisible(False)
         self.listMenu.close()
 
     def notify(self, message):

@@ -30,6 +30,8 @@ def sweep(dialog, options):
     config = read_bitcoin_config(options.datadir,options.conffile)
     if options.testnet: config['testnet'] = True
     crownd = connect_JSON(config)
+    if not dialog.new_address_checkbox.isVisible():
+        options.new = False
     if options.new:
         options.toaddress = crownd.getnewaddress('')
         dialog.to_address_edit.setText(options.toaddress)
@@ -106,6 +108,7 @@ def refresh(widget, options):
     order(addresses, widget.order_combobox.currentText())
     widget.available_label.setText(str(spendable_amount))
     widget.address_list_widget.clear()
+    widget.new_address_checkbox.setVisible(True)
     for address in addresses:
         widget.address_list_widget.addItem(address['data'])
 
