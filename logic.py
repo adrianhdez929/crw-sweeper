@@ -39,7 +39,7 @@ def sweep(dialog, options):
         return dialog.notify("To address is invalid")
     else:    
         fee = Decimal(options.fee)
-        amount = Decimal(options.amount)
+        amount = Decimal(options.amount) - fee
         while unlock_wallet(crownd, dialog.options.passphrase) == False:
             if dialog.options.pswdcanceled:
                 return
