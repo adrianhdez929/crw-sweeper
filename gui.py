@@ -188,8 +188,6 @@ class Dialog(QDialog):
         self.crw_label2.setText(QCoreApplication.translate("self", u"CRW", None))
         self.order_label.setText(QCoreApplication.translate("self", u"Order By", None))
         self.address_list_address_label.setText(QCoreApplication.translate("self", u"Address", None))
-        self.address_list_amount_label.setText(QCoreApplication.translate("self", u"Amount", None))
-        self.address_list_label_label.setText(QCoreApplication.translate("self", u"Label", None))
         self.about_button.setText(QCoreApplication.translate("self", u"About", None))
     
     def hideNewCheckbox(self):
