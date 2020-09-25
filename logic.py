@@ -97,7 +97,7 @@ def refresh(widget, options):
         for address,info in address_summary.items():
             n_transactions = len(info['outputs'])
             elem = {
-                'data': "%s %.4f %s (%s)"%(address, info['total'], info['account'], str(n_transactions)),
+                'data': "%s Amount: %.4f Label: %s UTXO:(%s)"%(address, info['total'], info['account'], str(n_transactions)),
                 'label': info['account'],
                 'amount': info['total'],
             }
