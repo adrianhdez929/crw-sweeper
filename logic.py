@@ -62,8 +62,8 @@ def selected_items(widget, options):
     for item in widget.selectedItems():
         item = item.text().split(" ")
         items.append(item[0])
-        selected_amount += float(item[1])
-    selected_amount = round(float(selected_amount), 4)
+        selected_amount += float(item[2])
+    selected_amount = round(selected_amount)
     widget.parent().parent().selected_label.setText(str(selected_amount))
     widget.parent().parent().amount_edit.setText(str(selected_amount))
     options.amount = str(selected_amount)
@@ -97,7 +97,7 @@ def refresh(widget, options):
         for address,info in address_summary.items():
             n_transactions = len(info['outputs'])
             elem = {
-                'data': "%s Amount: %.4f Label: %s UTXO:(%s)"%(address, info['total'], info['account'], str(n_transactions)),
+                'data': "%s Amount: %s Label: %s UTXO:(%s)"%(address, info['total'], info['account'], str(n_transactions)),
                 'label': info['account'],
                 'amount': info['total'],
             }
