@@ -63,7 +63,7 @@ def selected_items(widget, options):
         item = item.text().split(" ")
         items.append(item[0])
         selected_amount += float(item[2])
-    selected_amount = round(selected_amount)
+    selected_amount = selected_amount
     widget.parent().parent().selected_label.setText(str(selected_amount))
     widget.parent().parent().amount_edit.setText(str(selected_amount))
     options.amount = str(selected_amount)
@@ -104,7 +104,7 @@ def refresh(widget, options):
             addresses.append(elem)
             spendable_amount += info['total']
 
-    spendable_amount = round(float(spendable_amount), 4)
+    spendable_amount = float(spendable_amount)
     order(addresses, widget.order_combobox.currentText())
     widget.available_label.setText(str(spendable_amount))
     widget.address_list_widget.clear()
