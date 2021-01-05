@@ -176,7 +176,7 @@ class Dialog(QDialog):
         self.amount_edit.setText(QCoreApplication.translate("self", u"0", None))
         self.upto_checkbox.setText(QCoreApplication.translate("self", u"Up To", None))
         self.fee_label.setText(QCoreApplication.translate("self", u"Tx Fee", None))
-        self.fee_edit.setText(QCoreApplication.translate("self", u"0.025", None))
+        self.fee_edit.setText(QCoreApplication.translate("self", u"0.001", None))
         self.new_address_checkbox.setText(QCoreApplication.translate("self", u"New", None))
         self.sweep_button.setText(QCoreApplication.translate("self", u"Sweep", None))
         self.balance_groupbox.setTitle(QCoreApplication.translate("self", u"Balance", None))
@@ -191,7 +191,10 @@ class Dialog(QDialog):
         self.about_button.setText(QCoreApplication.translate("self", u"About", None))
     
     def hideNewCheckbox(self):
-        self.new_address_checkbox.setVisible(False)
+        if self.to_address_edit.text() == '':
+            self.new_address_checkbox.setVisible(True)
+        else:
+            self.new_address_checkbox.setVisible(False)
 
     def listItemRightClicked(self): 
         self.listMenu = QMenu()

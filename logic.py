@@ -7,6 +7,7 @@ def try_conn(dialog, options):
         config = read_bitcoin_config(options.datadir, options.conffile)
         if options.testnet: config['testnet'] = True
         crownd = connect_JSON(config)
+        
         crownd.getinfo()
     except Exception:
         return False
@@ -30,6 +31,7 @@ def sweep(dialog, options):
     config = read_bitcoin_config(options.datadir,options.conffile)
     if options.testnet: config['testnet'] = True
     crownd = connect_JSON(config)
+
     if not dialog.new_address_checkbox.isVisible():
         options.new = False
     if options.new:
@@ -41,11 +43,13 @@ def sweep(dialog, options):
         return dialog.notify("To address is invalid")
     else:    
         fee = Decimal(options.fee)
-        amount = Decimal(options.amount) - fee
+        amount = Decimal(options.amount)# - fee
         while unlock_wallet(crownd, dialog.options.passphrase) == False:
+            print(dialog.options.passphrase)
             if dialog.options.pswdcanceled:
                 return
             dialog.pswdask()
+        print(dialog.options.passphrase)
         txdata = create_tx(crownd, options.fromaddresses, options.toaddress, amount, fee, options.select, options.upto)
         sanity_test_fee(crownd, txdata, amount*Decimal("0.01"), fee)
         txlen = len(txdata)/2
