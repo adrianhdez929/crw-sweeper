@@ -1,10 +1,11 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog
-from gui import Dialog, Notification
+from PyQt5.QtWidgets import QApplication
+from gui import Ui
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    dlg = Dialog()
-    dlg.show()    
+    window = Ui()
+    app.exec_()
+
     sys.exit(app.exec_())
