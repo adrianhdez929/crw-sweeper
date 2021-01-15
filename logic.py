@@ -45,11 +45,9 @@ def sweep(dialog, options):
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)# - fee
         while unlock_wallet(crownd, dialog.options.passphrase) == False:
-            print(dialog.options.passphrase)
             if dialog.options.pswdcanceled:
                 return
             dialog.pswdask()
-        print(dialog.options.passphrase)
         txdata = create_tx(crownd, options.fromaddresses, options.toaddress, amount, fee, options.select, options.upto)
         sanity_test_fee(crownd, txdata, amount*Decimal("0.01"), fee)
         txlen = len(txdata)/2
