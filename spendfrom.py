@@ -54,8 +54,7 @@ def connect_JSON(config):
     testnet = (int(testnet) > 0)  # 0/1 in config file, convert to True/False
     if not 'rpcport' in config:
         config['rpcport'] = 19341 if testnet else 9341
-    #connect = "http://%s:%s@127.0.0.1:%s"%(config['rpcuser'], config['rpcpassword'], config['rpcport'])
-    connect = "http://%s:%s@92.60.46.21:%s"%("dfg45g45wrty6hhgg4ggbdfgdfgbsdfghfgfrw5454434343ttt", "r9rwe56779h65hhth4f432dcb57j76j6mh54gj65j5trhfgbhgbeg", "9341")
+    connect = "http://%s:%s@127.0.0.1:%s"%(config['rpcuser'], config['rpcpassword'], config['rpcport'])
     try:
         result = AuthServiceProxy(connect, timeout=600)
         # ServiceProxy is lazy-connect, so send an RPC command mostly to catch connection errors,
