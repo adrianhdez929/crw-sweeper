@@ -1,12 +1,15 @@
-from spendfrom import *
+from decimal import Decimal
+from spendfrom import SpendFrom
 from PyQt5.QtWidgets import QCheckBox
 
 
 def try_conn(dialog, options):
+    spendfrom = SpendFrom(dialog)
+
     try:
-        config = read_bitcoin_config(options.datadir, options.conffile)
+        config = spendfrom.read_bitcoin_config(options.datadir, options.conffile)
         if options.testnet: config['testnet'] = True
-        crownd = connect_JSON(config)
+        crownd = spendfrom.connect_JSON(config)
         
         crownd.getinfo()
     except Exception:
@@ -14,23 +17,30 @@ def try_conn(dialog, options):
     return True
 
 def connect(dialog, options):
+    spendfrom = SpendFrom(dialog)
+
     try:
-        check_json_precision()
-        config = read_bitcoin_config(options.datadir, options.conffile)
+        spendfrom.check_json_precision()
+        config = spendfrom.read_bitcoin_config(options.datadir, options.conffile)
         if options.testnet: config['testnet'] = True
-        crownd = connect_JSON(config)
+        crownd = spendfrom.connect_JSON(config)
     except Exception:
         return False
     else:
-        address_summary = list_available(crownd)
+        address_summary = spendfrom.list_available(crownd)
     return address_summary
 
 
 def sweep(dialog, options):
-    check_json_precision()
-    config = read_bitcoin_config(options.datadir,options.conffile)
+    spendfrom = SpendFrom(dialog)
+
+    spendfrom.check_json_precision()
+    config = spendfrom.read_bitcoin_config(options.datadir,options.conffile)
     if options.testnet: config['testnet'] = True
-    crownd = connect_JSON(config)
+    try:
+        crownd = spendfrom.connect_JSON(config)
+    except Exception:
+        return False
 
     if not dialog.new_address_checkbox.isVisible():
         options.new = False
@@ -44,12 +54,12 @@ def sweep(dialog, options):
     else:    
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)# - fee
-        while unlock_wallet(crownd, dialog.options.passphrase) == False:
+        while spendfrom.unlock_wallet(crownd, dialog.options.passphrase) == False:
             if dialog.options.pswdcanceled:
                 return
             dialog.pswdask()
-        txdata = create_tx(crownd, options.fromaddresses, options.toaddress, amount, fee, options.select, options.upto)
-        sanity_test_fee(crownd, txdata, amount*Decimal("0.01"), fee)
+        txdata = spendfrom.create_tx(crownd, options.fromaddresses, options.toaddress, amount, fee, options.select, options.upto)
+        spendfrom.sanity_test_fee(crownd, txdata, amount*Decimal("0.01"), fee)
         txlen = len(txdata)/2
         if txlen < 250000:
             txid = crownd.sendrawtransaction(txdata)
@@ -95,7 +105,7 @@ def refresh(widget, options):
     addresses = list()
     spendable_amount = 0
     address_summary = connect(widget, options)
-    if address_summary.items():
+    if address_summary and address_summary.items():
         for address,info in address_summary.items():
             n_transactions = len(info['outputs'])
             elem = {
