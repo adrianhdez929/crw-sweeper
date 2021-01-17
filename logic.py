@@ -1,6 +1,6 @@
 from decimal import Decimal
 from spendfrom import SpendFrom
-from PyQt5.QtWidgets import QCheckBox
+from PyQt5.QtWidgets import QCheckBox, QTableWidgetItem
 
 
 def try_conn(dialog, options):
@@ -72,9 +72,10 @@ def selected_items(widget, options):
     items = list()
     selected_amount = 0
     for item in widget.selectedItems():
-        item = item.text().split(" ")
-        items.append(item[0])
-        selected_amount += float(item[2])
+        if item.toolTip() == 'Address':
+            items.append(item.text())
+        if item.toolTip() == 'Balance':
+            selected_amount += float(item.text())
     selected_amount = selected_amount
     widget.parent().parent().selected_label.setText(str(selected_amount))
     widget.parent().parent().amount_edit.setText(str(selected_amount))
@@ -109,7 +110,7 @@ def refresh(widget, options):
         for address,info in address_summary.items():
             n_transactions = len(info['outputs'])
             elem = {
-                'data': "%s Amount: %s Label: %s UTXO:(%s)"%(address, info['total'], info['account'], str(n_transactions)),
+                'data': [address, info['total'], info['account'], str(n_transactions)],
                 'label': info['account'],
                 'amount': info['total'],
             }
@@ -121,8 +122,23 @@ def refresh(widget, options):
     widget.available_label.setText(str(spendable_amount))
     widget.address_list_widget.clear()
     widget.new_address_checkbox.setVisible(True)
+    table = widget.address_list_widget
+    table.setColumnCount(4)
+    table.setRowCount(len(addresses))
+    table.setHorizontalHeaderLabels(["Address", "Balance", "Label", "UTXO"])
+    x = 0
+    y = 0
     for address in addresses:
-        widget.address_list_widget.addItem(address['data'])
+        for item in address['data']:
+            table_item = QTableWidgetItem(str(item))
+            if type(item) is Decimal:
+                table_item.setToolTip('Balance')
+            if y == 0:
+                table_item.setToolTip('Address')
+            table.setItem(x, y, table_item)
+            y += 1
+        y = 0
+        x += 1
 
 def order(addresses, by):
     if by == 'Smallest':

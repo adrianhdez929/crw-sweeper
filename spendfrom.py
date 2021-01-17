@@ -31,8 +31,9 @@ class SpendFrom(object):
         satoshis = int(json.loads(json.dumps(float(n)))*1.0e8)
         if satoshis != 2000000000000003:
             raise RuntimeError("JSON encode/decode loses precision")
-
-    def determine_db_dir(self):
+    
+    @staticmethod
+    def determine_db_dir():
         """Return the default location of the crown data directory"""
         if platform.system() == "Darwin":
             return os.path.expanduser("~/Library/Application Support/Crown/")
@@ -53,8 +54,7 @@ class SpendFrom(object):
         testnet = (int(testnet) > 0)  # 0/1 in config file, convert to True/False
         if not 'rpcport' in config:
             config['rpcport'] = 19341 if testnet else 9341
-        #connect = "http://%s:%s@127.0.0.1:%s"%(config['rpcuser'], config['rpcpassword'], config['rpcport'])
-        connect = "http://%s:%s@92.60.46.21:%s"%("dfg45g45wrty6hhgg4ggbdfgdfgbsdfghfgfrw5454434343ttt", "r9rwe56779h65hhth4f432dcb57j76j6mh54gj65j5trhfgbhgbeg", "9341")
+        connect = "http://%s:%s@127.0.0.1:%s"%(config['rpcuser'], config['rpcpassword'], config['rpcport'])
         try:
             result = AuthServiceProxy(connect, timeout=600)
             # ServiceProxy is lazy-connect, so send an RPC command mostly to catch connection errors,
@@ -76,7 +76,7 @@ class SpendFrom(object):
             try:
                 crownd.walletpassphrase(passphrase, 5)
             except:
-                self.dialog.notify("Wrong passphrase\n")
+                self.dialog.notify("Please enter your passphrase\n")
 
         info = crownd.getinfo()
         return int(info['unlocked_until']) > time.time()

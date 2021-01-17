@@ -10,6 +10,12 @@
     <height>480</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Crown Sweeper</string>
   </property>
@@ -30,13 +36,66 @@
     <item row="0" column="1" colspan="2">
      <layout class="QGridLayout" name="gridLayout_6">
       <item row="1" column="0">
-       <widget class="QListWidget" name="address_list_widget">
-        <property name="contextMenuPolicy">
-         <enum>Qt::CustomContextMenu</enum>
+       <widget class="QTableWidget" name="address_list_widget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="columnCount">
+            <number>4</number>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::IgnoreAction</enum>
         </property>
         <property name="selectionMode">
          <enum>QAbstractItemView::MultiSelection</enum>
         </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="textElideMode">
+         <enum>Qt::ElideLeft</enum>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::NoPen</enum>
+        </property>
+        <column>
+         <property name="text">
+          <string>Addresses</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Balance</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Amount</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>UTXO</string>
+         </property>
+        </column>
        </widget>
       </item>
       <item row="0" column="0">
