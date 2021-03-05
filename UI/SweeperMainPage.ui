@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>480</height>
+    <height>351</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -43,8 +43,11 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="columnCount">
-            <number>4</number>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>200</height>
+         </size>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -78,7 +81,7 @@
         </property>
         <column>
          <property name="text">
-          <string>Addresses</string>
+          <string>New Column</string>
          </property>
         </column>
         <column>

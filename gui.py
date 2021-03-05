@@ -2,6 +2,7 @@ import sys, os
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QMenu, QAction, QApplication, QDialog
 from PyQt5.QtGui import QCursor, QFontMetrics, QIcon
+from PyQt5.QtCore import Qt
 from functools import partial
 
 
@@ -96,6 +97,7 @@ class Ui(QMainWindow):
         self.address_list_widget.itemSelectionChanged.connect(partial(selected_items, self.address_list_widget, self.options))
         self.order_combobox.currentIndexChanged.connect(partial(refresh, self, self.options))
         # OnRightClick
+        self.address_list_widget.setContextMenuPolicy(Qt.CustomContextMenu)
         self.address_list_widget.customContextMenuRequested.connect(self.listItemRightClicked)
 
     def hideNewCheckbox(self):
