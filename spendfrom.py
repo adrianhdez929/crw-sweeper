@@ -45,7 +45,6 @@ class SpendFrom(object):
         """Read the crown config file from dbdir, returns dictionary of settings"""
         with open(os.path.join(dbdir, conffile)) as stream:
             config = dict(line.strip().split('=', 1) for line in stream if not line.startswith("#") and not len(line.strip()) == 0)
-        #print("Leaving read_bitcoin_config with %s and %s"%(config['rpcuser'], config['rpcpassword']))
         return config
 
     def connect_JSON(self, config):
@@ -76,7 +75,8 @@ class SpendFrom(object):
             try:
                 crownd.walletpassphrase(passphrase, 5)
             except:
-                self.dialog.notify("Please enter your passphrase\n")
+                #self.dialog.notify("Please enter your passphrase\n")
+                pass
 
         info = crownd.getinfo()
         return int(info['unlocked_until']) > time.time()
@@ -127,14 +127,10 @@ class SpendFrom(object):
         outputs = []
         have = Decimal("0.0")
         n = 0
-        if verbosity > 0: print("Selecting coins from the set of %d inputs"%len(inputs))
-        if verbosity > 1: print(inputs)
         while have < needed and n < len(inputs) and n < 1660:
             outputs.append({ "txid":inputs[n]["txid"], "vout":inputs[n]["vout"]})
             have += inputs[n]["amount"]
             n += 1
-        if verbosity > 0: print("Chose %d UTXOs with total value %f CRW requiring %f CRW change"%(n, have, have-needed)) 
-        if verbosity > 2: print(outputs)   
         return (outputs, have-needed)
 
     def create_tx(self, crownd, fromaddresses, toaddress, amount, fee, criteria, upto):
@@ -156,7 +152,7 @@ class SpendFrom(object):
             if upto:
                 needed = total_available
                 amount = total_available - fee
-                print("Warning, only %f CRW available, sending up to %f CRW"%(total_available, amount))
+                self.dialog.notify("Warning, only %f CRW available, sending up to %f CRW"%(total_available, amount))
             else:
                 self.dialog.notify("Error, only %f CRW available, need %f CRW\n"%(total_available, needed))
                 return
