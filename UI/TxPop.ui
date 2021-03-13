@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#Dialog {
+	background: #0e1528;
+}</string>
+  </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
@@ -25,6 +30,13 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	background-color: #545966;
+	color: white;
+	border-radius: 8px;
+}</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -44,6 +56,24 @@
      <height>27</height>
     </rect>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	background-color: #545966;
+	color: white;
+	padding: 5px 5px;
+	border: none;
+	border-radius: 5px;
+}
+QPushButton:hover {
+	background-color: #c2c4c9;
+	color: black;
+	padding: 5px 5px;
+	border: none;
+}</string>
+   </property>
    <property name="text">
     <string>Copy</string>
    </property>
@@ -56,6 +86,21 @@
      <width>88</width>
      <height>27</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	background-color: #545966;
+	color: white;
+	padding: 5px 5px;
+	border: none;
+	border-radius: 5px;
+}
+QPushButton:hover {
+	background-color: #c2c4c9;
+	color: black;
+	padding: 5px 5px;
+	border: none;
+}</string>
    </property>
    <property name="text">
     <string>Close</string>

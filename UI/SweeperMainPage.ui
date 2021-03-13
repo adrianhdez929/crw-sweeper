@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>720</width>
-    <height>560</height>
+    <height>550</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,15 +22,23 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <property name="documentMode">
    <bool>true</bool>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="container" name="centralwidget">
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#centralwidget {
+	background: #0e1528;
+}</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
     <item row="0" column="1" colspan="2">
@@ -48,6 +56,11 @@
           <width>300</width>
           <height>200</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget::section {
+	border-radius:10px;
+}</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -103,28 +116,18 @@
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_8">
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: white;
+	margin: 0 5px;
+}</string>
+        </property>
         <property name="text">
          <string>Adresses</string>
         </property>
        </widget>
       </item>
      </layout>
-    </item>
-    <item row="0" column="0">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item row="0" column="3">
      <spacer name="horizontalSpacer_4">
@@ -142,181 +145,394 @@
       </property>
      </spacer>
     </item>
+    <item row="0" column="0">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="1" column="2">
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="5" column="1">
-       <widget class="QPushButton" name="sweep_button">
-        <property name="text">
-         <string>Sweep</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QLineEdit" name="amount_edit"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLineEdit" name="fee_edit">
-        <property name="text">
-         <string>0.001</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QLineEdit" name="to_address_edit"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="upto_checkbox">
-        <property name="text">
-         <string>Up To</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="new_address_checkbox">
-        <property name="text">
-         <string>New</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>To Address</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Amount</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Tx Fee</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QGroupBox" name="">
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+	background-color: #545966;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="5" column="0">
+        <widget class="QLineEdit" name="fee_edit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 0 5px;
+    background: white;
+    selection-background-color: #545966;
+	margin-left: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string>0.001</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QPushButton" name="sweep_button">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	background-color: #0e1528;
+	color: white;
+	padding: 5px 5px;
+	border: none;
+	border-radius: 5px;
+}
+QPushButton:hover {
+	background-color: #c2c4c9;
+	color: black;
+	padding: 5px 5px;
+	border: none;
+}</string>
+         </property>
+         <property name="text">
+          <string>Sweep</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="4">
+        <widget class="QLineEdit" name="amount_edit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 0 5px;
+    background: white;
+    selection-background-color: #545966;
+	margin: 0 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="4">
+        <widget class="QLineEdit" name="to_address_edit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 0 5px;
+    background: white;
+    selection-background-color: #545966;
+	 margin: 0 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QCheckBox" name="upto_checkbox">
+         <property name="styleSheet">
+          <string notr="true">QCheckBox {
+	color: white;
+}
+QCheckBox::indicator:unchecked {
+	background: white;
+}
+QCheckBox::indicator:checked {
+	background: #0e1528;
+}
+QCheckBox::indicator:unchecked:hover {
+	background: #c2c4c9;
+}
+QCheckBox::indicator:unchecked:pressed {
+	background: #0e1528;
+}
+QCheckBox::indicator:checked:pressed {
+	background: #c2c4c9;
+}</string>
+         </property>
+         <property name="text">
+          <string>Up To</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QCheckBox" name="new_address_checkbox">
+         <property name="styleSheet">
+          <string notr="true">QCheckBox {
+	color: white;
+}
+QCheckBox::indicator:unchecked {
+	background: white;
+}
+QCheckBox::indicator:checked {
+	background: #0e1528;
+}
+QCheckBox::indicator:unchecked:hover {
+	background: #c2c4c9;
+}
+QCheckBox::indicator:unchecked:pressed {
+	background: #0e1528;
+}
+QCheckBox::indicator:checked:pressed {
+	background: #c2c4c9;
+}</string>
+         </property>
+         <property name="text">
+          <string>New</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+	margin: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string>To Address</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+	margin: 0 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Amount</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+	margin: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Tx Fee</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="3">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item row="1" column="1">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="5" column="1" colspan="2">
-       <widget class="QComboBox" name="order_combobox"/>
-      </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Balance</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>Available:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>Selected:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>CRW</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>CRW</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="1" colspan="2">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="4" column="1" colspan="2">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Order By</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1" colspan="2">
-       <widget class="QLabel" name="available_label">
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QLabel" name="selected_label">
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QGroupBox" name="">
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+	background-color: #545966;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="1" colspan="2">
+        <widget class="QComboBox" name="order_combobox">
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+	style: none;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QLabel" name="label_9">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>Balance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+	margin: 0 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Available:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+	margin: 0 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Selected:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_4">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>CRW</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLabel" name="label_5">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>CRW</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="QLabel" name="label_10">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>Order By</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="QLabel" name="available_label">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="QLabel" name="selected_label">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -337,13 +553,20 @@
    </widget>
    <addaction name="menuabout"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>container</class>
+   <extends>QWidget</extends>
+   <header>container.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
