@@ -58,9 +58,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QTableWidget::section {
-	border-radius:10px;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -389,9 +387,7 @@ QCheckBox::indicator:checked:pressed {
        <item row="5" column="1" colspan="2">
         <widget class="QComboBox" name="order_combobox">
          <property name="styleSheet">
-          <string notr="true">QComboBox {
-	style: none;
-}</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
